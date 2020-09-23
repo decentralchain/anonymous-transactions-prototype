@@ -1,4 +1,4 @@
-# Anonymous transactions on wavesplatform
+# Anonymous transactions on decentralchain
 
 ## State
 
@@ -12,7 +12,7 @@ struct utxo {
 }
 ```
 
-Hashes are computed at bn254 curve and presented inside dataset of dApp at Waves blockchain in mapping `hash("U"+utxo) => {true|false}`
+Hashes are computed at bn254 curve and presented inside dataset of dApp at unitoken blockchain in mapping `hash("U"+utxo) => {true|false}`
 
 Nullifiers are special codes, allowing us to spend UTXOs. If we spend the UTXO, we do not publish, which utxo is spent, but we publish the nullifier of spent UTXO at the blockchain.  `nullifier = hash(privkey, secret)`.
 
@@ -124,7 +124,7 @@ func withdrawal(msg:ByteVector, sig:ByteVector, pub:ByteVector)
 
 ## UX
 
-The solution is the DApp, deployed on Waves blockchain.
+The solution is the DApp, deployed on unitoken blockchain.
 
 1. The first, user deposit assets to the smart contract.
 2. After that the user may make an anonymous transfer with his asset, using ephemeral private keys. A transaction sender is a smart contract, that's why the user can use uninitialized private keys.

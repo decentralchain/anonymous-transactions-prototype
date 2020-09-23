@@ -16,21 +16,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wavesplatform/anonymous-transactions-prototype.git"
+    "url": "git+https://github.com/decentralchain/anonymous-transactions-prototype.git"
   },
   "author": "Igor Gulamov",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/wavesplatform/anonymous-transactions-prototype/issues"
+    "url": "https://github.com/decentralchain/anonymous-transactions-prototype/issues"
   },
-  "homepage": "https://github.com/wavesplatform/anonymous-transactions-prototype#readme",
+  "homepage": "https://github.com/decentralchain/anonymous-transactions-prototype#readme",
   "devDependencies": {
     "mocha": "^6.1.4",
     "snarkjs": "^0.1.14",
     "wasmbuilder": "0.0.3"
   },
   "dependencies": {
-    "@waves/waves-crypto": "^3.0.17",
+    "@unitoken/unitoken-crypto": "^3.0.17",
     "big-integer": "^1.6.42",
     "circom": "^0.0.30",
     "circomlib": "0.0.12",

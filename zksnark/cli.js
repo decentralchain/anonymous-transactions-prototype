@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const version = require("./package").version;
-const { address, base58Encode } = require("@waves/waves-crypto");
+const { address, base58Encode } = require("@unitoken/unitoken-crypto");
 const { serializeVK, serializeProof, serializeInputs, fload, proof, createUtxo, getDepositInputs, getmsg, postmsg, stringifyBigInts,
   createTransfer, createWithdrawal, getTransferInputs, getWithdrawalInputs } = require("./src/utils.js");
 

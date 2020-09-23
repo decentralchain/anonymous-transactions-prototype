@@ -183,7 +183,7 @@ func transfer(proof:ByteVector, v:ByteVector, m0:ByteVector, m1:ByteVector) = {
 func deposit(proof:ByteVector, v:ByteVector, m:ByteVector) = {
    let pmt = extract(i.payment)
     let mn = getMessageNum()
-   if (isDefined(pmt.assetId)) then throw("can hodl waves only at the moment")
+   if (isDefined(pmt.assetId)) then throw("can hodl unitoken only at the moment")
    else {
         let hash= take(v, 32)
         let balance = pmt.amount

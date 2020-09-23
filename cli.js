@@ -1,7 +1,7 @@
 const axios = require("axios");
-const { broadcast, waitForTx, setScript, invokeScript, nodeInteraction } = require("@waves/waves-transactions");
+const { broadcast, waitForTx, setScript, invokeScript, nodeInteraction } = require("@unitoken/unitoken-transactions");
 const rxrange = require('to-regex-range');
-const { address, base58Encode, base58Decode, publicKey, privateKey } = require("@waves/waves-crypto");
+const { address, base58Encode, base58Decode, publicKey, privateKey } = require("@unitoken/unitoken-crypto");
 const fs = require("fs");
 const {rpcCall, rand256, serializeMessage, deserializeMessage, stringifyBigInts, unstringifyBigInts, fload, fsave, buff2bigintBe} = require("./zcrypto/src/utils.js")
 const babyJubJub = require("./zcrypto/src/babyJubJub.js");
@@ -32,8 +32,8 @@ async function accountDataEx(matches, address, nodeUrl) {
 
 
 let seed = env.MNEMONIC;
-const rpc = env.WAVES_RPC;
-const chainId = env.WAVES_CHAINID;
+const rpc = env.unitoken_RPC;
+const chainId = env.unitoken_CHAINID;
 
 
 const dAppPk = env.DAPP;
@@ -70,8 +70,8 @@ async function deposit(utxo) {
   await waitForTx(tx.id, { apiBase: rpc });
 }
 
-function wavesBufferDeserialize(s) {
-  assert(s.indexOf("base64:") === 0, "s is not waves base64 string");
+function unitokenBufferDeserialize(s) {
+  assert(s.indexOf("base64:") === 0, "s is not unitoken base64 string");
   return Buffer.from(s.substr(7), 'base64');
 }
 
@@ -206,7 +206,7 @@ async function syncData() {
 
   for (let k in res) {
 
-    const b = wavesBufferDeserialize(res[k].value);
+    const b = unitokenBufferDeserialize(res[k].value);
 
     const data = deserializeMessage(b);
     if (data.length === 14) {
@@ -324,14 +324,14 @@ const yargs = require("yargs")
 account details command
 =============
     nodejs cli.js details <option>
-    Print details of current seed (pubkey and address at waves, pubkey and private key at the DApp)
+    Print details of current seed (pubkey and address at unitoken, pubkey and private key at the DApp)
     Print anonymous and not anonymous balance
     -s or --seed <seed>
 
 deposit command
 =========================
     nodejs cli.js deposit <options>
-    Deposit waves to the DApp.
+    Deposit unitoken to the DApp.
     -s or --seed <seed>
       or
     --pub <pubkey>
@@ -341,7 +341,7 @@ deposit command
 withdrawal command
 ========================
     nodejs cli.js withdrawal <options>
-    Withdraw waves to address
+    Withdraw unitoken to address
     -s or --seed <seed> 
       or 
     -a or --address <address>
@@ -351,7 +351,7 @@ withdrawal command
 transfer command
 ==============
     nodejs cli.js transfer <options>
-    Transfer waves to another address.
+    Transfer unitoken to another address.
     -s or --seed <seed>
      or
     --pub <pubkey>
@@ -376,14 +376,14 @@ const {argv} = yargs;
     const balance = assets.length>=1 ? assets[0].balance : 0n;
     console.log(`
 seed:\t\t\t${seed}
-waves private key:\t${privateKey(seed)}
-waves pubkey:\t\t${publicKey(seed)}
-waves address:\t\t${address(seed, chainId)}
+unitoken private key:\t${privateKey(seed)}
+unitoken pubkey:\t\t${publicKey(seed)}
+unitoken address:\t\t${address(seed, chainId)}
 
 DApp private key:\t${babyJubJub.privkey(seed)}
 DApp public key:\t${babyJubJub.pubkey(seed)[0]}
 
-Waves balance:\t\t${await nodeInteraction.balance(address(seed, chainId), rpc)}
+unitoken balance:\t\t${await nodeInteraction.balance(address(seed, chainId), rpc)}
 DApp balance:\t\t${balance}
     `); 
   } else if(argv._[0].toUpperCase() === "DEPOSIT") {

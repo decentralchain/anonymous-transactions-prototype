@@ -1,20 +1,20 @@
-# Anonymous transactions engine for Waves blockchain
+# Anonymous transactions engine for unitoken blockchain
 
-This is anonymous transaction engine, implemented for waves blockchain. This is prototype, so, the project is very experimental.
+This is anonymous transaction engine, implemented for unitoken blockchain. This is prototype, so, the project is very experimental.
 
 ### Dependencies
 
 `nodejs@11.15.0`
 
-### Waves node
+### unitoken node
 
-The implementation works with modified waves node, supporting `groth16verify` function. The source code is at [https://github.com/snjax/Waves/tree/feature/groth16verifier](https://github.com/snjax/Waves/tree/feature/groth16verifier).
+The implementation works with modified unitoken node, supporting `groth16verify` function. The source code is at [https://github.com/snjax/unitoken/tree/feature/groth16verifier](https://github.com/snjax/unitoken/tree/feature/groth16verifier).
 
 Current state of `.env` file is
 
 ```
-WAVES_RPC=http://dev-node-aws-fr-2.wavesnodes.com:6869/
-WAVES_CHAINID=D
+unitoken_RPC=http://dev-node-aws-fr-2.unitokennodes.com:6869/
+unitoken_CHAINID=D
 DAPP=2rdJzzFcVeignvBhKyubsPjxM8WdEYyje573eaebEDM8
 MNEMONIC=<your seed passphrase>
 ```
@@ -23,13 +23,13 @@ The dApp is deployed at address `3FQ19SGXg2gXcd1AvQAwaP6Sd35knEqggVm` at the mom
 
 ### Faucet
 
-Type `node faucet.js` to get 100 test WAVES for your address, corresponding to `MNEMONIC`.
+Type `node faucet.js` to get 100 test unitoken for your address, corresponding to `MNEMONIC`.
 
 ### Cryptography
 
 Anonymity is zkSNARK-driven, we use [circom](https://github.com/iden3/circom) and groth16 proving scheme at BN254. You may read more about the circuit at [circuit.md](circuit.md).
 
-The client use Curve25519 to sign ordinary waves transactions and BabyJubJub to prove ownership of the assets inside the zkSNARK. For hashing we use Pedersen hash anywhere.
+The client use Curve25519 to sign ordinary unitoken transactions and BabyJubJub to prove ownership of the assets inside the zkSNARK. For hashing we use Pedersen hash anywhere.
 
 At current version anonimity set is not merkelized. Pedersen based merkle proofs use too much constraints for current circom version. We consider to use no MiMC hashes here. For futher versions of `circom` or for circuits implemented with `bellman` anonymity set may be expanded by several orders of magnitude.
 
@@ -60,7 +60,7 @@ The transactions are not signed, the fee is payable inside the snark. The receiv
 
 The first clone this repository via
 ```
-git clone https://github.com/wavesplatform/anonymous-transactions-prototype
+git clone https://github.com/decentralchain/anonymous-transactions-prototype
 ```
 After that install all npm packages
 ```
@@ -76,8 +76,8 @@ Specify `.env` file and deploy the contract to the blockchain
 
 |   |   |
 |---|---|
-|WAVES_RPC|url of waves node|
-|WAVES_CHAINID|chain id letter|
+|unitoken_RPC|url of unitoken node|
+|unitoken_CHAINID|chain id letter|
 |MNEMONIC|seed passphrase|
 |DAPP|dapp public key|
 
@@ -101,8 +101,8 @@ npm i&& cd zksnark && npm i && cd .. && cd zcrypto && npm i && cd ..
 
 |   |   |
 |---|---|
-|WAVES_RPC|url of waves node|
-|WAVES_CHAINID|chain id letter|
+|unitoken_RPC|url of unitoken node|
+|unitoken_CHAINID|chain id letter|
 |MNEMONIC|seed passphrase|
 |DAPP|dapp public key|
 
@@ -114,7 +114,7 @@ nodejs cli.js <command> <options>
 account details command
 =============
     nodejs cli.js details <option>
-    Print details of current seed (pubkey and address at waves, pubkey and
+    Print details of current seed (pubkey and address at unitoken, pubkey and
     private key at the DApp)
     Print anonymous and not anonymous balance
     -s or --seed <seed>
@@ -122,7 +122,7 @@ account details command
 deposit command
 =========================
     nodejs cli.js deposit <options>
-    Deposit waves to the DApp.
+    Deposit unitoken to the DApp.
     -s or --seed <seed>
       or
     --pub <pubkey>
@@ -132,7 +132,7 @@ deposit command
 withdrawal command
 ========================
     nodejs cli.js withdrawal <options>
-    Withdraw waves to address
+    Withdraw unitoken to address
     -s or --seed <seed>
       or
     -a or --address <address>
@@ -142,7 +142,7 @@ withdrawal command
 transfer command
 ==============
     nodejs cli.js transfer <options>
-    Transfer waves to another address.
+    Transfer unitoken to another address.
     -s or --seed <seed>
      or
     --pub <pubkey>

@@ -1,5 +1,5 @@
-const { broadcast, waitForTx, setScript, invokeScript, nodeInteraction, transfer } = require("@waves/waves-transactions");
-const { address, base58Encode, base58Decode, publicKey, privateKey } = require("@waves/waves-crypto");
+const { broadcast, waitForTx, setScript, invokeScript, nodeInteraction, transfer } = require("@unitoken/unitoken-transactions");
+const { address, base58Encode, base58Decode, publicKey, privateKey } = require("@unitoken/unitoken-crypto");
 const fetch = require('node-fetch');
 const env = process.env;
 if (env.NODE_ENV !== 'production') {
@@ -8,8 +8,8 @@ if (env.NODE_ENV !== 'production') {
 
 
 let seed = env.MNEMONIC;
-const rpc = env.WAVES_RPC;
-const chainId = env.WAVES_CHAINID;
+const rpc = env.unitoken_RPC;
+const chainId = env.unitoken_CHAINID;
 
 
 const fauseed = "arm march lottery domain vibrant damp action crazy cloud humor increase sheriff"
@@ -34,7 +34,7 @@ func verify() = {
 (async ()=> {
 
   if ((process.argv.length==3) && (process.argv[2]=="deploy")) {
-    let request = await fetch(`${env.WAVES_RPC}utils/script/compile`, { method: "POST", body: fauscript })
+    let request = await fetch(`${env.unitoken_RPC}utils/script/compile`, { method: "POST", body: fauscript })
     const { script } = await request.json();
     let tx = setScript({ script, fee: 1400000, chainId}, fauseed);
     await broadcast(tx, rpc);
